@@ -12,8 +12,8 @@ impl Token {
         match string {
             "(" => Ok(LParen),
             ")" => Ok(RParen),
-            num if num.chars().all(|ch| ch.is_ascii_digit()) => Ok(Num(str::parse(num).unwrap())),
             op if OpType::is_op(op) => Ok(Op(OpType::parse(op)?)),
+            num if num.chars().all(|ch| ch.is_ascii_digit()) => Ok(Num(str::parse(num).unwrap())),
             _ => Err(TokenError),
         }
     }
