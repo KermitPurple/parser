@@ -9,7 +9,6 @@ pub enum Token {
 impl Token {
     pub fn parse(string: &str) -> Result<Self, TokenError> {
         use Token::*;
-        println!("{:?}", string);
         match string {
             "(" => Ok(LParen),
             ")" => Ok(RParen),
