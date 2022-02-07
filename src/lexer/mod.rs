@@ -31,5 +31,6 @@ mod tests {
         assert_eq!(parse("+").unwrap(), vec![Op(Add)]);
         assert_eq!(parse("10 + 12").unwrap(), vec![Num(10), Op(Add), Num(12)]);
         assert_eq!(parse("10+12").unwrap(), vec![Num(10), Op(Add), Num(12)]);
+        assert_eq!(parse("(10+12)*2").unwrap(), vec![LParen, Num(10), Op(Add), Num(12), RParen, Op(Mul), Num(2)]);
     }
 }
