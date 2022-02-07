@@ -9,11 +9,12 @@ pub enum Token {
 impl Token {
     pub fn parse(string: &str) -> Result<Self, TokenError> {
         use Token::*;
+        println!("{:?}", string);
         match string {
             "(" => Ok(LParen),
             ")" => Ok(RParen),
             op if OpType::is_op(op) => Ok(Op(OpType::parse(op)?)),
-            num if num.chars().all(|ch| ch.is_ascii_digit()) => Ok(Num(str::parse(num).unwrap())),
+            num if num.chars().all(|ch| ch.is_ascii_digit()) && num.len() > 0 => Ok(Num(str::parse(num).unwrap())),
             _ => Err(TokenError),
         }
     }
