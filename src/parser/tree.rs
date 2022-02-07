@@ -28,5 +28,15 @@ mod tests {
     #[test]
     fn test_to_string(){
         assert_eq!("(1 + 2)", Tree::Add(Box::new(Tree::Int(1)), Box::new(Tree::Int(2))).to_string());
+        assert_eq!(
+            "(1 + (2 * 3))",
+            Tree::Add(
+                Box::new(Tree::Int(1)),
+                Box::new(Tree::Mul(
+                    Box::new(Tree::Int(2)),
+                    Box::new(Tree::Int(3))
+                ))
+            ).to_string(),
+        );
     }
 }
