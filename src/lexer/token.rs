@@ -13,7 +13,9 @@ impl Token {
             "(" => Ok(LParen),
             ")" => Ok(RParen),
             op if OpType::is_op(op) => Ok(Op(OpType::parse(op)?)),
-            num if num.chars().all(|ch| ch.is_ascii_digit()) && num.len() > 0 => Ok(Num(str::parse(num).unwrap())),
+            num if num.chars().all(|ch| ch.is_ascii_digit()) && num.len() > 0 => {
+                Ok(Num(str::parse(num).unwrap()))
+            }
             _ => Err(TokenError),
         }
     }
@@ -29,7 +31,7 @@ pub enum OpType {
 }
 
 impl OpType {
-    pub fn parse(string: &str) -> Result<Self, TokenError>{
+    pub fn parse(string: &str) -> Result<Self, TokenError> {
         use OpType::*;
         match string {
             "+" => Ok(Add),
@@ -40,7 +42,7 @@ impl OpType {
             _ => Err(TokenError),
         }
     }
-    
+
     pub fn is_op(string: &str) -> bool {
         match string {
             "+" | "-" | "*" | "/" | "%" => true,
@@ -57,9 +59,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_token_parse(){
-        use Token::*;
+    fn test_token_parse() {
         use OpType::*;
+        use Token::*;
         assert_eq!(Token::parse("100").unwrap(), Num(100));
         assert_eq!(Token::parse("22").unwrap(), Num(22));
         assert_eq!(Token::parse("19").unwrap(), Num(19));
@@ -74,7 +76,7 @@ mod tests {
     }
 
     #[test]
-    fn test_op_parse(){
+    fn test_op_parse() {
         use OpType::*;
         assert_eq!(OpType::parse("+").unwrap(), Add);
         assert_eq!(OpType::parse("-").unwrap(), Sub);
@@ -85,7 +87,7 @@ mod tests {
     }
 
     #[test]
-    fn test_is_op(){
+    fn test_is_op() {
         assert!(OpType::is_op("+"));
         assert!(OpType::is_op("-"));
         assert!(OpType::is_op("*"));

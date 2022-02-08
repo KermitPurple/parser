@@ -40,32 +40,34 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_eval(){
-        assert_eq!(3, Tree::Add(Box::new(Tree::Int(1)), Box::new(Tree::Int(2))).eval());
+    fn test_eval() {
+        assert_eq!(
+            3,
+            Tree::Add(Box::new(Tree::Int(1)), Box::new(Tree::Int(2))).eval()
+        );
         assert_eq!(
             7,
             Tree::Add(
                 Box::new(Tree::Int(1)),
-                Box::new(Tree::Mul(
-                    Box::new(Tree::Int(2)),
-                    Box::new(Tree::Int(3))
-                ))
-            ).eval(),
+                Box::new(Tree::Mul(Box::new(Tree::Int(2)), Box::new(Tree::Int(3))))
+            )
+            .eval(),
         );
     }
 
     #[test]
-    fn test_to_string(){
-        assert_eq!("(1 + 2)", Tree::Add(Box::new(Tree::Int(1)), Box::new(Tree::Int(2))).to_string());
+    fn test_to_string() {
+        assert_eq!(
+            "(1 + 2)",
+            Tree::Add(Box::new(Tree::Int(1)), Box::new(Tree::Int(2))).to_string()
+        );
         assert_eq!(
             "(1 + (2 * 3))",
             Tree::Add(
                 Box::new(Tree::Int(1)),
-                Box::new(Tree::Mul(
-                    Box::new(Tree::Int(2)),
-                    Box::new(Tree::Int(3))
-                ))
-            ).to_string(),
+                Box::new(Tree::Mul(Box::new(Tree::Int(2)), Box::new(Tree::Int(3))))
+            )
+            .to_string(),
         );
     }
 }
